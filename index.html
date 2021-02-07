@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador de IMC</title>
+    <style>
+        *{
+            margin-top: 5%;
+            margin-bottom:5%;
+            margin-left: 15%;
+            margin-right: 15%;
+            padding: 0;
+        }
+        body{
+            background-image: url("saudavel2.jpg");
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+
+        }
+        fieldset#corpo {
+            background: antiquewhite;
+
+
+        }
+        h2{
+            font-family: Century;
+            font-size: 30px;
+            color: black;
+
+
+
+        }
+        h1 {
+            font-family: "Agency FB";
+            font-size:40px;
+            margin-left: 150px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <h1> O seu simulador de IMC</h1>
+    <form id="formulario">
+        <fieldset id="corpo">
+            <label><h2>Massa</h2></label><br/>
+            <input type="number" name="nMassa" min="0" step="0.1"><br/>
+            <label><h2>Altura</h2></label> <br/>
+            <input type="number" name="nAltura" min="0" step="0.01"> <br/>
+            <input type="button" name="bsimular" value="Simular" onclick="simulador()"/>
+        </fieldset>
+    </form>
+    <script>
+        function simulador() {
+            var formulario  = document.getElementById("formulario")
+            var altura = parseFloat(formulario.nAltura.value)
+            var massa = parseFloat(formulario.nMassa.value)
+            var imc = Math.round(massa /(altura * altura))
+            var imcnormal1 = 18.5
+            var imcnormal2 = 24.9
+            alert("Seu imc é de: " + imc)
+            if (imc > 18.5) {
+                var massaideal = Math.round( imcnormal2 * altura * altura )
+                var massaperda = parseInt(massa - massaideal)
+                if( imc > 25){
+                    if (imc > 30) {
+                        if (imc > 35) {
+                            if (imc > 40) {
+                                alert("Você está com Obesidade Mórbida. Não desista!! Vamos diminuir: " + massaperda + " kg")
+                            }
+                            else {
+                                alert("Você está com Obesidade grau 2. Vamos diminuir: " + massaperda + " kg. Vamos lá!!")
+                            }
+                        }
+                        else {
+                            alert("Você está com Obesidade grau 1. Precisa diminuir: " + massaperda + " kg. Juntos a uma vida saudável!")
+                        }
+                    }
+                    else {
+                        alert("Você está com sobrepeso. Você só precisa perder: " + massaperda + " kg. Relaxa!")
+                    }
+                }
+                else {
+                    alert("Você está no peso normal. Continue assim! :D")
+                }
+            }
+            else {
+                var massaideal = Math.floor( imcnormal1 * altura * altura )
+                var massaganha = parseInt(massaideal - massa)
+                alert("Você está abaixo do peso ideal. Fica tranquilo! Você só precisa ganhar " + massaganha +" kg")
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
